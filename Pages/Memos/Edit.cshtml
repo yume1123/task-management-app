@@ -1,0 +1,69 @@
+@page
+@model CrudApp.Pages_Memos.EditModel
+
+@{
+    ViewData["Title"] = "編集";
+}
+
+<h1>編集</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+
+            <input type="hidden" asp-for="Memo.Id" />
+
+            <div class="form-group">
+
+                    <label asp-for="Memo.Title"></label>
+
+            <input asp-for="Memo.Title" class="form-control"/>
+
+            </div>
+
+            <div class="form-group">
+
+                <label asp-for="Memo.Description"></label>
+
+                <textarea
+                    asp-for="Memo.Description"
+                    class="form-control"
+                    rows="3">
+                </textarea>
+
+            </div>
+
+            <div class="form-group">
+
+                    <label asp-for="Memo.DueDate"></label>
+
+                    <input
+                        asp-for="Memo.DueDate"
+                        type="datetime-local"
+                        class="form-control"
+                        value="@(Model.Memo.DueDate?.ToString("yyyy-MM-ddTHH:mm"))"/>
+
+    </div>
+
+    <button type="submit"
+        class="btn btn-primary">
+
+        更新
+
+    </button>
+
+    <a asp-page="./Index"
+       class="btn btn-secondary">
+
+        前のページに戻る
+
+    </a>
+
+</form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

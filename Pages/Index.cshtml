@@ -1,0 +1,20 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "ホーム";
+}
+
+<div class="text-center">
+    <h1 class="display-4">
+        📝 タスク管理アプリ
+    </h1>
+
+    <p class="lead">
+        タスクを登録して管理できます
+    </p>
+
+    <a asp-page="/Memos/Index"
+       class="btn btn-primary btn-lg">
+        タスク一覧へ
+    </a>
+</div>

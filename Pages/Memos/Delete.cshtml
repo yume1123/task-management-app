@@ -1,0 +1,33 @@
+@page
+@model CrudApp.Pages_Memos.DeleteModel
+
+@{
+    ViewData["Title"] = "削除";
+}
+
+<h1>削除</h1>
+
+<h3>このデータを削除してもいいですか?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Memo.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Memo.Title)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="Memo.Id" />
+        <input type="submit"
+           value="削除"
+           class="btn btn-danger" />
+           
+        <a asp-page="./Index"
+            class="btn btn-secondary">
+            前のページに戻る
+        </a>
+    </form>
+</div>

@@ -1,0 +1,124 @@
+@page
+@model CrudApp.Pages_Memos.IndexModel
+
+@{
+    ViewData["Title"] = "ホーム";
+}
+
+<h1>ホーム</h1>
+
+<p>
+    <a asp-page="Create"
+       class="btn btn-primary">
+        新規登録
+    </a>
+</p>
+
+<table class="table">
+
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Memo[0].Title)
+            </th>
+
+            <th>
+                メモ
+            </th>
+
+            <th>
+                締切
+            </th>
+
+            <th>
+                状態
+            </th>
+
+            <th>
+                操作
+            </th>
+
+            <th>
+                作成日時
+            </th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+
+@foreach (var item in Model.Memo)
+{
+<tr>
+
+    <td>
+        @item.Title
+    </td>
+
+    <td>
+        @item.Description
+    </td>
+
+    <td>
+        @if (item.DueDate != null)
+        {
+            @item.DueDate?.ToString("yyyy/MM/dd HH:mm")
+        }
+    </td>
+
+    <td>
+
+        <form method="post"
+              asp-page-handler="Toggle"
+              asp-route-id="@item.Id"
+              style="display:inline;">
+
+            <button
+                type="submit"
+                class="btn btn-sm @(item.IsCompleted ? "btn-success" : "btn-warning")"
+
+                onclick='@(item.IsCompleted
+                    ? "return confirm(\"このタスクを削除しますか？\")"
+                    : "")'>
+
+                @(item.IsCompleted ? "完了" : "未完了")
+
+            </button>
+
+        </form>
+
+    </td>
+
+    <td>
+
+        <a asp-page="./Edit"
+           asp-route-id="@item.Id"
+           class="btn btn-sm btn-outline-primary">
+            編集
+        </a>
+
+        <a asp-page="./Details"
+           asp-route-id="@item.Id"
+           class="btn btn-sm btn-outline-secondary">
+            詳細
+        </a>
+
+        <a asp-page="./Delete"
+           asp-route-id="@item.Id"
+           class="btn btn-sm btn-outline-danger">
+            削除
+        </a>
+
+    </td>
+
+    <td>
+        @item.CreatedAt.ToString("yyyy/MM/dd HH:mm")
+    </td>
+
+</tr>
+}
+
+    </tbody>
+
+</table>
